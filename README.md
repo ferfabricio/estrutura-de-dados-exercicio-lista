@@ -39,3 +39,8 @@ A interface proposta insere inteiros porém não retorna a referência do nó ge
     void mostrar();
 ```
 
+## Funcionamento do código
+
+A classe de lista foi implementada utilizando TDD e os testes são encontrados na pasta `test/java/ListTest.java`.
+
+Neste arquivo temos vários casos de uso, sendo o nome dos métodos descritivos para a execução dos mesmos.
