@@ -23,8 +23,8 @@ class ListaTest {
         lista.inserePrimeiro(1);
         lista.inserePrimeiro(2);
         No no = lista.removePrimeiro();
-        assertEquals(2, no.valor);
-        assertEquals(1, no.proximoElemento.valor);
+        assertEquals(2, no.getValor());
+        assertEquals(1, no.getProximoElemento().getValor());
     }
 
     @org.junit.jupiter.api.Test
@@ -32,7 +32,7 @@ class ListaTest {
         Lista lista = new Lista();
         lista.inserePrimeiro(1);
         No no = lista.removePrimeiro();
-        assertEquals(1, no.valor);
+        assertEquals(1, no.getValor());
         assertTrue(lista.vazia());
     }
 
@@ -47,7 +47,7 @@ class ListaTest {
         Lista lista = new Lista();
         lista.inserePrimeiro(1);
         No no = lista.removeUltimo();
-        assertEquals(1, no.valor);
+        assertEquals(1, no.getValor());
     }
 
     @org.junit.jupiter.api.Test
@@ -57,7 +57,7 @@ class ListaTest {
         lista.inserePrimeiro(2);
         lista.inserePrimeiro(3);
         No no = lista.removeUltimo();
-        assertEquals(1, no.valor);
+        assertEquals(1, no.getValor());
     }
 
     @org.junit.jupiter.api.Test
@@ -65,7 +65,7 @@ class ListaTest {
         Lista lista = new Lista();
         lista.inserePrimeiro(1);
         No no = lista.removeUltimo();
-        assertEquals(1, no.valor);
+        assertEquals(1, no.getValor());
         assertTrue(lista.vazia());
     }
 
@@ -75,7 +75,7 @@ class ListaTest {
         lista.insereUltimo(1);
         assertFalse(lista.vazia());
         No no = lista.removeUltimo();
-        assertEquals(1, no.valor);
+        assertEquals(1, no.getValor());
         assertTrue(lista.vazia());
     }
 
@@ -87,7 +87,7 @@ class ListaTest {
         lista.insereUltimo(3);
         assertFalse(lista.vazia());
         No no = lista.removeUltimo();
-        assertEquals(3, no.valor);
+        assertEquals(3, no.getValor());
     }
 
     @org.junit.jupiter.api.Test
@@ -95,8 +95,8 @@ class ListaTest {
         Lista lista = new Lista();
         No no = lista.insereUltimo(1);
         No noTests = lista.insereDepois(no, 5);
-        assertNull(noTests.proximoElemento);
-        assertEquals(5, no.proximoElemento.valor);
+        assertNull(noTests.getProximoElemento());
+        assertEquals(5, no.getProximoElemento().getValor());
     }
 
     @org.junit.jupiter.api.Test
@@ -111,7 +111,7 @@ class ListaTest {
         lista.insereUltimo(7);
         lista.mostrar();
         No noTests = lista.insereDepois(no, 8);
-        assertEquals(7, noTests.proximoElemento.valor);
+        assertEquals(7, noTests.getProximoElemento().getValor());
     }
 
     @org.junit.jupiter.api.Test
@@ -121,7 +121,7 @@ class ListaTest {
         assertFalse(lista.vazia());
         No noTests = lista.remove(no);
         assertTrue(lista.vazia());
-        assertEquals(1, noTests.valor);
+        assertEquals(1, noTests.getValor());
     }
 
     @org.junit.jupiter.api.Test
@@ -132,9 +132,9 @@ class ListaTest {
         No no = lista.insereUltimo(3);
         lista.insereUltimo(4);
         No noTests = lista.remove(no);
-        assertEquals(3, noTests.valor);
+        assertEquals(3, noTests.getValor());
 
         No ultimo = lista.removeUltimo();
-        assertEquals(4, ultimo.valor);
+        assertEquals(4, ultimo.getValor());
     }
 }

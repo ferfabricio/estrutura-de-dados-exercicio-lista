@@ -8,11 +8,10 @@ public class Lista implements ILista {
 
     @Override
     public No inserePrimeiro(int info) {
-        No no = new No();
-        no.valor = info;
+        No no = new No(info);
 
         if (!this.vazia()) {
-            no.proximoElemento = this.primeiroNo;
+            no.setProximoElemento(this.primeiroNo);
         }
 
         this.primeiroNo = no;
@@ -22,18 +21,17 @@ public class Lista implements ILista {
 
     @Override
     public No insereDepois(No no, int info) {
-        No novo = new No();
-        novo.valor = info;
+        No novo = new No(info);
 
         if (this.primeiroNo == no) {
-            this.primeiroNo.proximoElemento = novo;
+            this.primeiroNo.setProximoElemento(novo);
         } else {
-            No check = this.primeiroNo.proximoElemento;
+            No check = this.primeiroNo.getProximoElemento();
             while (check != no) {
-                check = check.proximoElemento;
+                check = check.getProximoElemento();
             }
-            novo.proximoElemento = check.proximoElemento;
-            check.proximoElemento = novo;
+            novo.setProximoElemento(check.getProximoElemento());
+            check.setProximoElemento(novo);
         }
 
         return novo;
@@ -41,18 +39,18 @@ public class Lista implements ILista {
 
     @Override
     public No insereUltimo(int info) {
-        No novo = new No();
-        novo.valor = info;
+        No novo = new No(info);
+
         if (this.primeiroNo == null) {
             this.primeiroNo = novo;
         } else {
             No no = this.primeiroNo;
             boolean ultimo = false;
             while (!ultimo) {
-                if (no.proximoElemento != null) {
-                    no = no.proximoElemento;
+                if (no.getProximoElemento() != null) {
+                    no = no.getProximoElemento();
                 } else {
-                    no.proximoElemento = novo;
+                    no.setProximoElemento(novo);
                     ultimo = true;
                 }
             }
@@ -66,7 +64,13 @@ public class Lista implements ILista {
             throw new ListaVaziaException();
         }
         No no = this.primeiroNo;
-        this.primeiroNo = null;
+
+        if (no.getProximoElemento() != null) {
+            this.primeiroNo = no.getProximoElemento();
+        } else {
+            this.primeiroNo = null;
+        }
+
         return no;
     }
 
@@ -75,19 +79,19 @@ public class Lista implements ILista {
         No anterior;
         No no = this.primeiroNo;
 
-        if (this.primeiroNo.proximoElemento == null) {
+        if (this.primeiroNo.getProximoElemento() == null) {
             this.primeiroNo = null;
             return no;
         }
         anterior = no;
         boolean ultimo = false;
         while (!ultimo) {
-            if (no.proximoElemento == null) {
+            if (no.getProximoElemento() == null) {
                 ultimo = true;
-                anterior.proximoElemento = null;
+                anterior.setProximoElemento(null);
             } else {
                 anterior = no;
-                no = no.proximoElemento;
+                no = no.getProximoElemento();
             }
         }
 
@@ -100,13 +104,13 @@ public class Lista implements ILista {
             this.primeiroNo = null;
             return no;
         } else {
-            No check = this.primeiroNo.proximoElemento;
+            No check = this.primeiroNo.getProximoElemento();
             No anterior = this.primeiroNo;
             while (check != no) {
                 anterior = check;
-                check = check.proximoElemento;
+                check = check.getProximoElemento();
             }
-            anterior.proximoElemento = check.proximoElemento;
+            anterior.setProximoElemento(check.getProximoElemento());
             return check;
         }
     }
@@ -117,9 +121,9 @@ public class Lista implements ILista {
         int i = 1;
         boolean ultimo = false;
         while(!ultimo) {
-            System.out.printf("No: %d, Valor: %d, Existe proximo: %s\n", i, no.valor, no.proximoElemento == null ? "Nao" : "Sim");
-            if (no.proximoElemento != null) {
-                no = no.proximoElemento;
+            System.out.printf("No: %d, Valor: %d, Existe proximo: %s\n", i, no.getValor(), no.getProximoElemento() == null ? "Nao" : "Sim");
+            if (no.getProximoElemento() != null) {
+                no = no.getProximoElemento();
             } else {
                 ultimo = true;
             }
